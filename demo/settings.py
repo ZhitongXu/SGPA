@@ -20,7 +20,7 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'f@f8rh*x476oy+k-y&f8e-g(@#bz%+gaqiqn2sqbr)@4&mhip@'
+SECRET_KEY = ''
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -230,7 +230,7 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.163.com'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = 'RSSKnowledgeGraph@163.com'
-EMAIL_HOST_PASSWORD = 'IQAFYGHYJLKUTDGL'
+EMAIL_HOST_PASSWORD = ''
 EMAIL_USE_SSL = True
 DEFAULT_FROM_EMAIL = 'RSSKnowledgeGraph@163.com' #这一项一定需要添加
 EMAIL_FROM = 'SGPA official<RSSKnowledgeGraph@163.com>' #可加可不加
