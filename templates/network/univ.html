@@ -1,0 +1,329 @@
+{% extends "users/base.html" %}
+{%  load static %}
+
+{% block content %}
+
+    {% if user.profile.level == 1 %}
+        <p>请等待权限开放</p>
+    {% else %}
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                            {% for m,n in dic.items %}
+                                {% if m == univ %}
+                            <h3 class="text-themecolor">{{ n }}</h3>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+        </div>
+
+        <div class="row">
+                        <!-- Column -->
+                        <!--div class="col-lg-8"-->
+            <div class="col-sm-10 col-xs-10 col-sm-offset-0">
+                            <div class="card">
+                                <div id="test", class="card-body">
+                                </div>
+                            </div>
+                        </div>
+        </div>
+    {% endif %}
+{% endblock content %}
+
+{% block d3 %}
+<style>
+
+	.link {
+	  stroke: #c1c1c1;
+    stroke-width: 1px;
+    pointer-events: all;
+	}
+
+  .node circle {
+	  pointer-events: all;
+	  stroke: #777;
+	  stroke-width: 1px;
+	}
+
+
+	div.tooltip {
+    position: absolute;
+    background-color: white;
+    max-width: 200px;
+    height: auto;
+    padding: 1px;
+    border-style: solid;
+    border-radius: 4px;
+    border-width: 1px;
+    box-shadow: 3px 3px 10px rgba(0, 0, 0, .5);
+    pointer-events: none;
+  }
+
+</style>
+
+
+
+<script src="https://d3js.org/d3.v4.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/2.24.0/d3-legend.min.js"></script>
+<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+
+
+
+<script>
+
+
+function circleColour(d){
+	if(d.group =="model selection"){
+		return "#CCFF0080";
+	} else if (d.group =="machine learning"){
+		return "#00FF6680";
+	} else if (d.group =="theoretic statistics"){
+		return "#0066FF80";
+	} else if (d.group =="bio statistics"){
+		return "#CC00FF80";
+	} else {
+		return "#FF000080";
+	}
+}
+
+var dv = document.getElementById("test");
+cardwid = Number(window.getComputedStyle(dv,null).width.slice(0,-2));
+
+var margin = {top: -5, right: -5, bottom: -5, left: -5},
+    width = 0.92*cardwid - margin.left - margin.right,
+    //width = 600 - margin.left - margin.right,
+    height = 400 - margin.top - margin.bottom;
+
+
+var tooltip = d3.select(".card-body")
+	.append("div")
+	.attr("class", "tooltip")
+	.style("opacity", 0);
+
+
+d3.json("{% url 'graph' univ %}", function(error, graph) {
+  if (error) throw error;
+
+  var zoom = d3.behavior.zoom()
+    .scaleExtent([0.1, 10])
+    .on("zoom", zoomed);
+
+var drag = d3.behavior.drag()
+    .origin(function(d) { return d; })
+    .on("dragstart", dragstarted)
+    .on("drag", dragged)
+    .on("dragend", dragended);
+
+var slider = d3.select(".card-body").append("p").append("input")
+  .datum({})
+  .attr("type", "range")
+  .attr("value", zoom.scaleExtent()[0])
+  .attr("min", zoom.scaleExtent()[0])
+  .attr("max", zoom.scaleExtent()[1])
+  .attr("step", (zoom.scaleExtent()[1] - zoom.scaleExtent()[0]) / 100)
+  .on("input", slided);
+
+var svg = d3.select(".card-body").append("svg")
+    .attr("width", width + margin.left + margin.right)
+    .attr("height", height + margin.top + margin.bottom)
+  .append("g")
+    .attr("transform", "translate(" + margin.left + "," + margin.right + ")")
+    .call(zoom);
+
+var container = svg.append("g");
+
+container.append("rect")
+    .attr("x",-3000)
+    .attr("y",-3000)
+    .attr("width",3000*2)
+    .attr("height",3000*2)
+    .attr("fill","transparent");
+
+function zoomed() {
+  container.attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+  slider.property("value",  d3.event.scale);
+}
+
+function dragstarted(d) {
+  d3.event.sourceEvent.stopPropagation();
+  d3.select(this).classed("dragging", true);
+}
+
+function dragged(d) {
+  d3.select(this).attr("cx", d.x = d3.event.x).attr("cy", d.y = d3.event.y);
+}
+
+function dragended(d) {
+  d3.select(this).classed("dragging", false);
+}
+
+function slided(d){
+  zoom.scale(d3.select(this).property("value"))
+    .event(svg);
+}
+
+
+  const simulation = d3.forceSimulation()
+    .nodes(graph.nodes)
+    .force('link', d3.forceLink().id(d => d.id))
+    .force('charge', d3.forceManyBody())
+    .force('center', d3.forceCenter(width / 2, height / 2))
+    .on('tick', ticked);
+
+  simulation.force('link')
+    .links(graph.links);
+
+
+
+  let link = container.selectAll('line')
+    .data(graph.links)
+    .enter().append('line');
+
+  link
+    .attr('class', 'link')
+  	.on('mouseover.tooltip', function(d) {
+      	tooltip.transition()
+        	.duration(300)
+        	.style("opacity", .8);
+      	tooltip.html("Source: "+ d.source.id +
+                     "<p/>Target: " + d.target.id +
+                    "<p/>Strength: "  + d.value)
+        	.style("left", (d3.event.pageX - 100) + "px")
+        	.style("top", (d3.event.pageY - 100) + "px");
+    	})
+    	.on("mouseout.tooltip", function() {
+	      tooltip.transition()
+	        .duration(100)
+	        .style("opacity", 0);
+	    })
+  		.on('mouseout.fade', fade(1))
+	    .on("mousemove", function() {
+	      tooltip.style("left", (d3.event.pageX - 100) + "px")
+	        .style("top", (d3.event.pageY - 100) + "px");
+	    });
+;
+
+  let node = container.selectAll('.node')
+    .data(graph.nodes)
+    .enter().append('g')
+    .attr('class', 'node')
+    .call(d3.drag()
+    	.on("start", nodedragstarted)
+      .on("drag", nodedragged)
+      .on("end", nodedragended));
+
+  function nodedragstarted(d) {
+  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  d.fx = d.x;
+  d.fy = d.y;
+}
+
+function nodedragged(d) {
+  d.fx = d3.event.x;
+  d.fy = d3.event.y;
+}
+
+function nodedragended(d) {
+  if (!d3.event.active) simulation.alphaTarget(0);
+  //d.fx = null;
+  //d.fy = null;
+}
+
+  node.append('circle')
+    .attr('r', function(d) { return 6*d.size; })
+  	.attr("fill", circleColour)
+    .on('mouseover.tooltip', function(d) {
+      	tooltip.transition()
+        	.duration(300)
+        	.style("opacity", .8);
+      	tooltip.html("Name: " + d.id + "<p/>Group: " + d.group)
+        	.style("left", (d3.event.pageX - 100) + "px")
+        	.style("top", (d3.event.pageY - 100) + "px");
+    	})
+  	.on('mouseover.fade', fade(0.1))
+    .on("mouseout.tooltip", function() {
+        tooltip.transition()
+	        .duration(100)
+	        .style("opacity", 0);
+	    })
+  	.on('mouseout.fade', fade(1))
+	    .on("mousemove", function() {
+	      tooltip.style("left", (d3.event.pageX - 100) + "px")
+	        .style("top", (d3.event.pageY - 100) + "px");
+	    })
+  	.on('dblclick',releasenode)
+
+
+  node.append('text')
+    .attr('x', 0)
+    .attr('dy', '.35em')
+	.attr("fill", "	#828282")
+	.attr("font-size",12)
+    .text(d => d.name);
+
+  function ticked() {
+    link
+      .attr('x1', d => d.source.x)
+      .attr('y1', d => d.source.y)
+      .attr('x2', d => d.target.x)
+      .attr('y2', d => d.target.y);
+
+    node
+      .attr('transform', d => `translate(${d.x},${d.y})`);
+  }
+
+
+function releasenode(d) {
+    d.fx = null;
+    d.fy = null;
+}
+
+
+
+
+  const linkedByIndex = {};
+  graph.links.forEach(d => {
+    linkedByIndex[`${d.source.index},${d.target.index}`] = 1;
+  });
+
+  function isConnected(a, b) {
+    return linkedByIndex[`${a.index},${b.index}`] || linkedByIndex[`${b.index},${a.index}`] || a.index === b.index;
+  }
+
+  function fade(opacity) {
+    return d => {
+      node.style('stroke-opacity', function (o) {
+        const thisOpacity = isConnected(d, o) ? 1 : opacity;
+        this.setAttribute('fill-opacity', thisOpacity);
+        return thisOpacity;
+      });
+
+      link.style('stroke-opacity', o => (o.source === d || o.target === d ? 1 : opacity));
+
+    };
+  }
+  var sequentialScale = d3.scaleOrdinal(["#FF000080", "#CC00FF80", "#0066FF80", "#00FF6680", "#CCFF0080"])
+  .domain(["bayesian inference", "bio statistics", "theoretic statistics", "machine learning", "model selection"]);
+
+
+svg.append("g")
+  .attr("class", "legendSequential")
+  .attr("transform", "translate("+(50)+","+(height-150)+")");
+
+var legendSequential = d3.legendColor()
+    .shapeWidth(30)
+    .cells(11)
+    .orient("vertical")
+		.title("Group name by color:")
+		.titleWidth(100)
+    .scale(sequentialScale)
+
+svg.select(".legendSequential")
+  .call(legendSequential);
+
+
+
+})
+
+
+</script>
+{% endblock d3 %}

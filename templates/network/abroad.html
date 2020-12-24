@@ -1,0 +1,63 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">国际名校研究热点</h3>
+        </div>
+    </div>
+    {% if user.profile.level == 1 %}
+        <p>请等待权限开放</p>
+    {% else %}
+        <div class="row">
+        <div class="col">
+            <div class="card-columns">
+                <div class="card ">
+            <div class="card-body">
+              <h4 class="card-title">美国</h4>
+                <a href="{% url 'univ_abroad' 'berkeley' %}" class="card-link">加州大学伯克利分校</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'chicago' %}" class="card-link">芝加哥大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'cmu' %}" class="card-link">卡耐基梅隆大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'columbia' %}" class="card-link">哥伦比亚大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'harvard' %}" class="card-link">哈佛大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'michigan' %}" class="card-link">密西根大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'mit' %}" class="card-link">麻省理工学院</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'penn' %}" class="card-link">宾夕法尼亚大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'stanford' %}" class="card-link">斯坦福大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'yale' %}" class="card-link">耶鲁大学</a>
+            </div>
+        </div>
+                <div class="card ">
+            <div class="card-body">
+              <h4 class="card-title">英国</h4>
+                <a href="{% url 'univ_abroad' 'cambridge' %}" class="card-link">剑桥大学</a>
+                <br>
+                <a href="{% url 'univ_abroad' 'oxford' %}" class="card-link">牛津大学</a>
+            </div>
+        </div>
+                <div class="card ">
+            <div class="card-body">
+              <h4 class="card-title">加拿大</h4>
+                <a href="{% url 'univ_abroad' 'toronto' %}" class="card-link">多伦多大学</a>
+            </div>
+        </div>
+                <div class="card ">
+            <div class="card-body">
+              <h4 class="card-title">澳大利亚</h4>
+                <a href="{% url 'univ_abroad' 'australian' %}" class="card-link">澳洲国立大学</a>
+                </div>
+        </div>
+            </div>
+        </div>
+    </div>
+    {% endif %}
+{% endblock content %}

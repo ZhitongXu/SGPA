@@ -1,0 +1,61 @@
+{% extends "users/base.html" %}
+{%  load static %}
+
+{% block content %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">统计学研究热点的演变</h3>
+        </div>
+
+    </div>
+
+    {% if user.profile.level == 1 %}
+        <p>请等待权限开放</p>
+    {% else %}
+        <h3>国外统计学研究热点历史演变</h3>
+        <h4>国外统计学研究热点的词频统计</h4>
+        <p>		从31681篇2006年到2018年WOS统计学期刊论文中提取出745个关键词，并将745个关键词分为贝叶斯推断、临床研究、模型选择、机器学习、非参数五个大类。通过29602篇2006年到2018年第一作者为国外的WOS统计学期刊论文，根据年份对词频统计总数较多的41个关键词进行每年的词频统计，关键词对应的编号和类别如下：</p>
+        <figure ><table border="1" style="text-align: center;" align="center">
+        <thead>
+        <tr><th>  编号  </th><th>  关键词（中）  </th><th>  关键词（英）  </th><th>  类别（中）  </th><th>  类别（英文）  </th></tr></thead>
+        <tbody><tr><td>  1  </td><td>  马尔科夫链蒙特卡洛  </td><td>  markov chain monte carlo  </td><td>  贝叶斯推断  </td><td>  Bayesian Inference  </td></tr><tr><td>  2  </td><td>  Bootstrap  </td><td>  bootstrap  </td><td>  经济统计  </td><td>  Economic  </td></tr><tr><td>  3  </td><td>  变量选择  </td><td>  variable selection  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  4  </td><td>  分类  </td><td>  classification  </td><td>  机器学习  </td><td>  Machine Learning  </td></tr><tr><td>  5  </td><td>  Lasso  </td><td>  lasso  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  6  </td><td>  非参数回归  </td><td>  non-parametric regression  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  7  </td><td>  因果推断  </td><td>  causal inference  </td><td>  生物统计  </td><td>  Bio Statistics  </td></tr><tr><td>  8  </td><td>  稀疏性  </td><td>  sparsity  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  9  </td><td>  生存分析  </td><td>  survival analysis  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  10  </td><td>  不完全数据  </td><td>  missing data  </td><td>  生物统计  </td><td>  Bio Statistics  </td></tr><tr><td>  11  </td><td>  一致性  </td><td>  consistency  </td><td>  经济统计  </td><td>  Economic  </td></tr><tr><td>  12  </td><td>  纵列数据  </td><td>  longitudinal data  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  13  </td><td>  聚类  </td><td>  clustering  </td><td>  机器学习  </td><td>  Machine Learning  </td></tr><tr><td>  14  </td><td>  混合模型  </td><td>  mixture model  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  15  </td><td>  图模型  </td><td>  graphical model  </td><td>  机器学习  </td><td>  Machine Learning  </td></tr><tr><td>  16  </td><td>  测量误差  </td><td>  measurement error  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  17  </td><td>  EM算法  </td><td>  EM algorithm  </td><td>  贝叶斯推断  </td><td>  Bayesian Inference  </td></tr><tr><td>  18  </td><td>  函数型数据分析  </td><td>  functional data analysis  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  19  </td><td>  正则化  </td><td>  regularization  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  20  </td><td>  辅助变量  </td><td>  instrumental variable  </td><td>  生物统计  </td><td>  Bio Statistics  </td></tr><tr><td>  21  </td><td>  最大似然  </td><td>  maximum likelihood  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  22  </td><td>  高斯过程  </td><td>  gaussian process  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  23  </td><td>  稳健性  </td><td>  robustness  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  24  </td><td>  高维数据  </td><td>  high dimensional data  </td><td>  机器学习  </td><td>  Machine Learning  </td></tr><tr><td>  25  </td><td>  FDR  </td><td>  false discovery rate  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  26  </td><td>  降维  </td><td>  dimension reduction  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  27  </td><td>  广义线性模型  </td><td>  generalized linear model  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  28  </td><td>  渐进正态性  </td><td>  asymptotic normality  </td><td>  经济统计  </td><td>  Economic  </td></tr><tr><td>  29  </td><td>  多重检验  </td><td>  multiple testing  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  30  </td><td>  假设检验  </td><td>  hypothesis testing  </td><td>  经济统计  </td><td>  Economic  </td></tr><tr><td>  31  </td><td>  平行数据  </td><td>  panel data  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  32  </td><td>  时间序列  </td><td>  time series  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  33  </td><td>  分层模型  </td><td>  hierarchical model  </td><td>  贝叶斯推断  </td><td>  Bayesian Inference  </td></tr><tr><td>  34  </td><td>  随机效应  </td><td>  random effect  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  35  </td><td>  分位数回归  </td><td>  quantile regression  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  36  </td><td>  灵敏度分析  </td><td>  sensitivity analysis  </td><td>  生物统计  </td><td>  Bio Statistics  </td></tr><tr><td>  37  </td><td>  隐马尔科夫模型  </td><td>  hidden markov model  </td><td>  贝叶斯推断  </td><td>  Bayesian Inference  </td></tr><tr><td>  38  </td><td>  交叉验证  </td><td>  cross validation  </td><td>  模型选择  </td><td>  Model Selection  </td></tr><tr><td>  39  </td><td>  经验似然  </td><td>  empirical likelihood  </td><td>  生物统计  </td><td>  Bio Statistics  </td></tr><tr><td>  40  </td><td>  鞅  </td><td>  martingale  </td><td>  经济统计  </td><td>  Economic  </td></tr><tr><td>  41  </td><td>  图像分割  </td><td>  image segmentation  </td><td>  机器学习  </td><td>  Machine Learning  </td></tr></tbody>
+        </table></figure>
+        <p>根据每一年的对上述39个关键次词的词频统计，可以得到每一年关键词的分布情况，可以由此大致看出国外统计学研究热点随时间的变化情况，得到13张每年关键词分布网络图如下：</p>
+        <p><img src={% static 'network/media/06.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/07.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/08.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/09.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/10.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/11.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/12.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/13.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/14.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/15.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/16.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/17.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p><img src={% static 'network/media/18.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;"></p>
+        <p>根据上面2006——2018年13张高频关键词分布图可以看出统计研究热点的动态变化以及不同领域之间的联系。</p>
+        <h4>国外统计研究热点的演变</h4>
+        <p>从之前表格中展示的39个关键词中选出类别为模型选择的22个关键词，通过计算关键词所占百分比对它们进行较为具体的演变过程分析，2006年到2018年模型选择类别关键词的演变展示如下：</p>
+        <p><img src={% static 'network/media/06-18.png' %} style="width:700px;height:500px;position:relative;left:50%;margin-left:-350px;">					</p>
+        <p>从上图中可以得到一些关键词的变化特征：稀疏性热度在2006——2008年处于明显的上升趋势；混合模型与测量误差的热度在2012、2013年有明显的下降，近几年有所回升；纵向数据和lasso一直处于相对较高的热度；高斯过程的热度处于略微上升的趋势。</p>
+        <h3>国内外研究热点的具体变化</h3>
+        <p>国内研究热点与国外研究热点变化相比，可能会产生延迟、滞后，甚至完全相反的现象，也会有部分研究热点和国外研究热点步伐一致。对41个关键词在国外的词频变化进行具体分析，得到不同的变化趋势和热点演变，同时与国内研究热点的变化进行比较。</p>
+        <h4>国外研究热点的热度上升现象</h4>
+        <p><img src={% static 'network/media/sparse.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>对于稀疏性热度的比较，国外研究稀疏性的热度在2011、2012年有一个明显的提升，之后一直热度不低；国内在稀疏性的研究在2015、2016年才开始热度提升，同样有延迟现象。</p>
+        <p><img src={% static 'network/media/cluster.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>关键词聚类在国外论文的热度在2014年之前处于基本平稳的状态，近几年热度大幅度上升，达到顶峰。而国内在聚类的热度近几年也略有上升趋势，与国外研究变化同步。</p>
+        <h4>国外研究热点的热度下降现象</h4>
+        <p><img src={% static 'network/media/classify.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>分类的热度在国外研究中一直处于略微下降的趋势。国内分类研究的热度在2009——2014年有一定涨幅，这可能是热度延迟的现象；而近几年研究热度又有上涨趋势，与国外研究趋势相反。</p>
+        <p><img src={% static 'network/media/yang.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p><img src={% static 'network/media/seg.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>关键词鞅和图像分割都在2015年起至今有一个明显的热度大幅度下滑现象，而国内论文数量始终很低，不具有代表性。</p>
+        <h4>国外研究热点的热度回升回落现象</h4>
+        <p><img src={% static 'network/media/dimred.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>在降维方面的研究，国外降维的热度变化幅度较小，在2010——2013年有小幅度的上升，2014——2017年处于低谷，2018年有上升趋势，这与国内降维方向研究热度变化类似。</p>
+        <p><img src={% static 'network/media/markov.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>马尔科夫链蒙特卡洛的热度变化比较可以看出，之前对国外研究显示马尔科夫链蒙特卡洛的热度在2008——2010年达到顶峰，近几年热度消退，但近几年又有回升的趋势。国内在2008——2010年则没有相关热点论文，自2013年起，才有一定的相关研究出现，这有明显的国内研究热度延迟出现的情况。</p>
+    {% endif %}
+{% endblock content %}

@@ -1,0 +1,152 @@
+{% extends "users/base.html" %}
+
+{% block content %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">国内名校研究热点</h3>
+        </div>
+    </div>
+
+    {% if user.profile.level == 1 %}
+        <p>请等待权限开放</p>
+    {% else %}
+        <div class="row">
+
+                    <!-- Column -->
+                    <div class="card-columns">
+
+                        <div class="card ">
+                        <div class="card-body">
+                          <h4 class="card-title">北京</h4>
+                            <a href="{% url 'univ_chs' 'peking' %}" class="card-link">北京大学</a>
+                            <br>
+                            <a href="{% url 'univ_chs' 'tsinghua' %}">清华大学</a>
+                            <br>
+                            <a href="{% url 'univ_chs' 'ruc' %}">中国人民大学</a>
+                            <br>
+                            <a href="#" class="card-link">北京师范大学</a>
+                            <br>
+                            <a href="#" class="card-link">北京理工大学</a>
+                            <br>
+                            <a href="#" class="card-link">北京工业大学</a>
+                            <br>
+                            <a href="#" class="card-link">中国科学院</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">上海</h4>
+                            <a href="{% url 'univ_chs' 'fudan' %}" class="card-link">复旦大学</a>
+                            <br>
+                            <a href="#" class="card-link">上海交通大学</a>
+                            <br>
+                            <a href="#" class="card-link">华东师范大学</a>
+                            <br>
+                            <a href="#" class="card-link">上海财经大学</a>
+                            <br>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">天津</h4>
+                            <a href="{% url 'univ_chs' 'nankai' %}" class="card-link">南开大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">江苏</h4>
+                            <a href="#" class="card-link">苏州大学</a>
+                            <br>
+                            <a href="#" class="card-link">东南大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">浙江</h4>
+                            <a href="#" class="card-link">浙江大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">福建</h4>
+                            <a href="{% url 'univ_chs' 'xiamen' %}" class="card-link">厦门大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">广东</h4>
+                            <a href="#" class="card-link">广州大学</a>
+                            <br>
+                            <a href="#" class="card-link">中山大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">山东</h4>
+                            <a href="#" class="card-link">山东大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">湖北</h4>
+                            <a href="#" class="card-link">武汉大学</a>
+                            <br>
+                            <a href="#" class="card-link">华中师范大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">吉林</h4>
+                            <a href="#" class="card-link">吉林大学</a>
+                            <br>
+                            <a href="#" class="card-link">东北师范大学</a>
+                            <br>
+                            <a href="#" class="card-link">长春工业大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">四川</h4>
+                            <a href="#" class="card-link">西南财经大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">安徽</h4>
+                            <a href="#" class="card-link">中国科学技术大学</a>
+                            <br>
+                            <a href="#" class="card-link">安徽大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">广西</h4>
+                            <a href="#" class="card-link">广西师范大学</a>
+                        </div>
+                    </div>
+
+                        <div class="card ">
+                        <div class="card-body">
+                            <h4 class="card-title">云南</h4>
+                            <a href="#" class="card-link">云南大学</a>
+                            <br>
+                            <a href="#" class="card-link">云南财经大学</a>
+                        </div>
+                    </div>
+
+                    </div>
+                </div>
+    {% endif %}
+{% endblock content %}

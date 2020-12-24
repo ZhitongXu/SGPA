@@ -1,0 +1,236 @@
+{%  load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'network/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'network/perfect-scrollbar.css' %}">
+
+    <!-- This page CSS -->
+    <!-- chartist CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/morris.css' %}">
+    <!--c3 CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/c3.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/style.css' %}">
+
+    <!-- Preloader - style you can find in spinners.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/spinners.css' %}">
+
+    <!-- Dashboard 1 Page CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/dashboard.css' %}">
+    <!-- You can change the theme colors from here -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/default.css' %}">
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+<![endif]-->
+</head>
+
+<body class="fix-header fix-sidebar card-no-border">
+    <!-- ============================================================== -->
+    <!-- Preloader - style you can find in spinners.css -->
+    <!-- ============================================================== -->
+    <div class="preloader">
+        <div class="loader">
+            <div class="loader__figure"></div>
+            <p class="loader__label">Demo</p>
+        </div>
+    </div>
+    <!-- ============================================================== -->
+    <!-- Main wrapper - style you can find in pages.scss -->
+    <!-- ============================================================== -->
+    <div id="main-wrapper">
+        <!-- ============================================================== -->
+        <!-- Topbar header - style you can find in pages.scss -->
+        <!-- ============================================================== -->
+        <header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="home.html">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src={% static 'network/media/rss.jpg' %} alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                         <!-- dark Logo text -->
+                         </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-bars"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+
+                    </ul>
+
+                    <div class="navbar-nav">
+                      {% if user.is_authenticated %}
+                        <a class="nav-item nav-link" href="{% url 'profile' %}">个人信息</a>
+                        <a class="nav-item nav-link" href="{% url 'logout' %}">注销</a>
+                      {% else %}
+                        <a class="nav-item nav-link" href="{% url 'login' %}">登录</a>
+                        <a class="nav-item nav-link" href="{% url 'register' %}">注册</a>
+                      {% endif %}
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src={% static 'network/media/rss-icon.jpg' %} alt="creator" class="" /> <span class="hidden-md-down">2019 network</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+        <!-- ============================================================== -->
+        <!-- End Topbar header -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <aside class="left-sidebar">
+            <!-- Sidebar scroll-->
+            <div class="scroll-sidebar">
+                <!-- Sidebar navigation-->
+                <nav class="sidebar-nav">
+                    <ul id="sidebarnav">
+                        {% if user.is_authenticated %}
+                            <li> <a class="waves-effect waves-dark" href="{% url 'network-home' %}" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">项目简介</span></a>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="{% url 'intro' %}" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">研究主题</span></a>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="{% url 'growth' %}" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">研究主题成长路径</span></a>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="{% url 'abroad' %}" aria-expanded="false"><i class="fa fa-table"></i><span class="hide-menu">国际名校研究热点</span></a>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="{% url 'china' %}" aria-expanded="false"><i class="fa fa-user-circle-o"></i><span class="hide-menu">国内名校研究热点</span></a>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="{% url 'ques' %}" aria-expanded="false"><i class="fa fa-smile-o"></i><span class="hide-menu">问卷调查</span></a>
+                            </li>
+                            <li> <a class="waves-effect waves-dark" href="{% url 'ball' %}" aria-expanded="false"><i class="fa fa-globe"></i><span class="hide-menu">关键词选择</span></a>
+                            </li>
+                        {% else %}
+                            <li> <a class="waves-effect waves-dark" href="{% url 'open-intro' %}" aria-expanded="false"><i class="fa fa-tachometer"></i><span class="hide-menu">项目简介</span></a>
+                            </li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                <!-- End Sidebar navigation -->
+            </div>
+            <!-- End Sidebar scroll-->
+        </aside>
+        <!-- ============================================================== -->
+        <!-- End Left Sidebar - style you can find in sidebar.scss  -->
+        <!-- ============================================================== -->
+        <!-- ============================================================== -->
+        <!-- Page wrapper  -->
+        <!-- ============================================================== -->
+        <div class="page-wrapper">
+            <!-- ============================================================== -->
+            <!-- Container fluid  -->
+            <!-- ============================================================== -->
+            <div class="container-fluid">
+                <!-- ============================================================== -->
+                <!-- Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+
+                <!-- ============================================================== -->
+                <!-- End Bread crumb and right sidebar toggle -->
+                <!-- ============================================================== -->
+
+
+
+                <!-- ============================================================== -->
+                <!-- Sales Chart and browser state-->
+                <!-- ============================================================== -->
+
+                {% if messages %}
+                    {% for message in messages %}
+                        <div class="alert alert-{{ message.tags }}">
+                            {{ message }}
+                        </div>
+                    {% endfor %}
+                {% endif %}
+                {% block content %}{% endblock %}
+
+                <!-- ============================================================== -->
+                <!-- End Sales Chart -->
+                <!-- ============================================================== -->
+
+            </div>
+            <!-- ============================================================== -->
+            <!-- End Container fluid  -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- footer -->
+            <!-- ============================================================== -->
+            <!-- ============================================================== -->
+            <!-- End footer -->
+            <!-- ============================================================== -->
+        </div>
+        <!-- ============================================================== -->
+        <!-- End Page wrapper  -->
+        <!-- ============================================================== -->
+    </div>
+    <!-- ============================================================== -->
+    <!-- End Wrapper -->
+    <!-- ============================================================== -->
+    <!-- ============================================================== -->
+    <!-- All Jquery -->
+    <!-- ============================================================== -->
+		<script src={% static 'network/jquery.min.js' %}></script>
+    <!-- Bootstrap popper Core JavaScript -->
+    <script src={% static 'network/popper.min.js' %}></script>
+    <script src={% static 'network/bootstrap.min.js' %}></script>
+    <!-- slimscrollbar scrollbar JavaScript -->
+    <script src={% static 'network/perfect-scrollbar.jquery.min.js' %}></script>
+    <!--Wave Effects -->
+    <script src={% static 'network/waves.js' %}></script>
+    <!--Menu sidebar -->
+    <script src={% static 'network/sidebarmenu.js' %}></script>
+    <!--Custom JavaScript -->
+    <script src={% static 'network/custom.min.js' %}></script>
+    <!-- ============================================================== -->
+    <!-- This page plugins -->
+    <!-- ============================================================== -->
+    <!--morris JavaScript -->
+    <script src={% static 'network/raphael-min.js' %}></script>
+    <script src={% static 'network/morris.min.js' %}></script>
+    <!--c3 JavaScript -->
+    <script src={% static 'network/d3.min.js' %}></script>
+    <script src={% static 'network/c3.min.js' %}></script>
+    <!-- Chart JS -->
+    <script src={% static 'network/dashboard.js' %}></script>
+
+</body>
+
+{% block d3 %}{% endblock %}
+
+</html>

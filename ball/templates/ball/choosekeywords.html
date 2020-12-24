@@ -1,0 +1,152 @@
+{% load static %}
+{% load likes_tags %}
+
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="stylesheet" type="text/css" href="{% static 'network/bootstrap.min.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'network/perfect-scrollbar.css' %}">
+
+    <!-- This page CSS -->
+    <!-- chartist CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/morris.css' %}">
+    <!--c3 CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/c3.min.css' %}">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/style.css' %}">
+
+    <!-- Preloader - style you can find in spinners.css -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/spinners.css' %}">
+
+    <!-- Dashboard 1 Page CSS -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/dashboard.css' %}">
+    <!-- You can change the theme colors from here -->
+    <link rel="stylesheet" type="text/css" href="{% static 'network/default.css' %}">
+
+<style type="text/css">
+#tagbox{position:relative;margin:20px auto 0px;width:600px;height:500px;background:transparent;}
+#tagbox a{position:absolute;padding:3px 6px;font-family:Microsoft YaHei;color:#999;TOP:0px;font-weight:bold;text-decoration:none;left:0px}
+#tagbox a:hover{border:#87CEFA 2px solid;background:transparent;}
+#tagbox a.like .active{
+    color:#87CEFA;
+}
+#tagbox .blue{color:blue}
+#tagbox .red{color:red}
+#tagbox .yellow{color:yellow}
+</style>
+
+</head>
+<body>
+
+<script type="text/javascript" src={% static 'ball/script.js' %}></script>
+<script src={% static 'network/jquery.min.js' %}></script>
+
+
+<header class="topbar">
+            <nav class="navbar top-navbar navbar-expand-md navbar-light">
+                <!-- ============================================================== -->
+                <!-- Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-header">
+                    <a class="navbar-brand" href="{% url 'network-home' %}">
+                        <!-- Logo icon --><b>
+                            <!--You can put here icon as well // <i class="wi wi-sunset"></i> //-->
+                            <!-- Dark Logo icon -->
+                            <img src={% static 'network/media/rss.jpg' %} alt="homepage" class="dark-logo" />
+                            <!-- Light Logo icon -->
+                        </b>
+                        <!--End Logo icon -->
+                        <!-- Logo text -->
+                         <!-- dark Logo text -->
+                         </a>
+                </div>
+                <!-- ============================================================== -->
+                <!-- End Logo -->
+                <!-- ============================================================== -->
+                <div class="navbar-collapse">
+                    <!-- ============================================================== -->
+                    <!-- toggle and nav items -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item"> <a class="nav-link nav-toggler hidden-md-up waves-effect waves-dark" href="javascript:void(0)"><i class="fa fa-bars"></i></a> </li>
+                        <!-- ============================================================== -->
+                        <!-- Search -->
+                        <!-- ============================================================== -->
+
+                    </ul>
+
+                    <div class="navbar-nav">
+                        <a class="nav-item nav-link" href="{% url 'ball' %}">基础知识</a>
+                        <a class="nav-item nav-link" href="{% url 'ballone' %}">专业知识1</a>
+                        <a class="nav-item nav-link" href="{% url 'balltwo' %}">专业知识2</a>
+                        <a class="nav-item nav-link" href="{% url 'ballthree' %}">专业知识3</a>
+                        <a class="nav-item nav-link" href="{% url 'nextball' %}">研究热点</a>
+                    </div>
+                    <!-- ============================================================== -->
+                    <!-- User profile and search -->
+                    <!-- ============================================================== -->
+                    <ul class="navbar-nav my-lg-0">
+                        <!-- ============================================================== -->
+                        <!-- Profile -->
+                        <!-- ============================================================== -->
+                        <li class="nav-item dropdown u-pro">
+                            <a class="nav-link dropdown-toggle waves-effect waves-dark profile-pic" href="{% url 'network-home' %}" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img src={% static 'network/media/rss-icon.jpg' %} alt="creator" class="" /> <span class="hidden-md-down">2019 network</span> </a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </header>
+
+<div id="tagbox">
+    {% for word in keywords.all %}
+        <a onclick="likeChange(this, '{% get_content_type word %}', {{ word.pk }})" class="like">
+        <span class="glyphicon glyphicon-thumbs-up {% get_like_status word %}" >{{ word.title }}</span>
+        </a>
+
+	{% endfor %}
+</div>
+
+</body>
+
+<script type="text/javascript">
+    function likeChange(obj, content_type, object_id){
+            var is_like = obj.getElementsByClassName('active').length == 0
+            $.ajax({
+                url: "{% url 'like_change' %}",
+                type: 'GET',
+                data: {
+                    content_type: content_type,
+                    object_id: object_id,
+                    is_like: is_like
+                },
+                cache: false,
+                success: function(data){
+                    console.log(data)
+                    if(data['status']=='SUCCESS'){
+                        //window.location.reload();
+                        // 更新点赞状态
+                        var element = $(obj.getElementsByClassName('glyphicon'));
+                        if(is_like){
+                            element.addClass('active');
+                        }else{
+                            element.removeClass('active');
+                        }
+                        // 更新点赞数量
+                        var liked_num = $(obj.getElementsByClassName('liked-num'));
+                        liked_num.text(data['liked_num']);
+                    }else{
+                        alert(data['message']);
+                    }
+                },
+                error: function(xhr){
+                    console.log(xhr)
+                }
+            });
+        }
+    </script>
+
+</html>

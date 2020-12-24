@@ -1,0 +1,32 @@
+{% extends "users/base.html" %}
+{%  load static %}
+
+{% block content %}
+
+    {% if user.profile.level == 1 %}
+        <p>请等待权限开放</p>
+    {% else %}
+        <div class="row page-titles">
+            <div class="col-md-5 align-self-center">
+                            {% for m,n in dic.items %}
+                                {% if m == univ %}
+                            <h3 class="text-themecolor">{{ n }}</h3>
+                                {% endif %}
+                            {% endfor %}
+                        </div>
+
+        </div>
+
+        <div class="row">
+                        <!-- Column -->
+                        <!--div class="col-lg-8"-->
+            <div class="col-sm-12 col-xs-12 col-sm-offset-0">
+                            <div class="card">
+                                <img src={% static address %}/>
+
+                            </div>
+                        </div>
+
+        </div>
+    {% endif %}
+{% endblock content %}

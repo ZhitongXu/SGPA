@@ -1,0 +1,59 @@
+{% extends "users/base.html" %}
+{%  load static %}
+
+{% block content %}
+    <div class="row page-titles">
+        <div class="col-md-5 align-self-center">
+            <h3 class="text-themecolor">WoS 22类统计学期刊载文统计与分析</h3>
+        </div>
+    </div>
+
+    {% if user.profile.level == 1 %}
+        <p>请等待权限开放</p>
+    {% else %}
+        <h2>数据来源与研究方法</h2>
+        <p>		本文以Web of Science 中的22类统计学期刊载文为主要研究对象，时间跨度为2006-2018年。为研究中国作者的贡献，从31681条数据(论文数)筛选第一作者为中国人(以下简称国内)的论文共2079篇论文，然后与第一作者非中国人的(以下简称国外)论文进行对比分析。</p>
+        <p>		数据集全部的字段名如表格 1所示：</p>
+        <p><img src={% static 'network/media/tab1.png' %} style="width:400px;height:320px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>		研究因子筛选：期刊类别；(文章篇幅)；基金资助论文比例；第一作者所在单位(以下简称第一单位)；第一单位是否来自24所高校；合作情况；<strong>关键词与关键词扩展</strong>；研究领域；。</p>
+        <p>		研究方法：文献计量分析，关键词共现分析等。</p>
+        <h2>期刊载文分析</h2>
+        <h3>发文数量</h3>
+        <p>		统计年发文数量，是对比国内外统计学科竞争力的最直观因素之一，绘制时间序列折线图如下：</p>
+        <p><img src={% static 'network/media/pic1.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>		结果显示，三者均随着时间缓慢上升，国外年发文数与总年发文数有着近乎一致的趋势，对总体波动率贡献很大；而国内年发文数则相对平稳，呈稳步上升的态势。</p>
+        <p>		单看图表 1，可能会觉得国内发文数量与国外相比不过九牛一毛，贡献率较低，但如果我们统计国内外发文数比值，可能会得到不一样的结论：</p>
+        <p><img src={% static 'network/media/pic2.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>		由图表 2可得，国内外年发文数比值由2006年的小于0.04，迅速上升到了2018年的大于0.12，提高了近4倍。这说明中国作者在统计学期刊的发文总数比值虽然不高，但考虑到国内外人口规模的差异，以及国内外发文数比值的不断攀升，我们可以认为中国在统计学学科领域已占有一席之地，且未来有着更高潜力。</p>
+        <h3>载文篇幅</h3>
+        <p>		国内外论文篇幅(页数)对比，国内论文为了追求信息密度而限制文章篇幅，国外优质期刊则不限制篇幅。</p>
+        <h3>基金资助论文比例</h3>
+        <p>		基金论文的数量是衡量期刊科研能力与水平的一项重要指标，一般而言，期刊载文的基金论文比例与期刊的学术水平呈正相关关系。</p>
+        <p>		国家自然科学基金委员会(NSFC)是管理国家自然科学基金的国务院直属事业单位，通过NSFC对文献及单位的资助情况，可以看出国家对于统计学人才培养与支持的分布情况。</p>
+        <p>		NSFC基金支持数目最多的前25所高校排名情况直方图为：</p>
+        <p><img src={% static 'network/media/pic3.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>		排名前3位的高校分别为中国科学院大学，清华大学，北京大学，NSFC基金资助前三位与发文数量前三位(见图表 4)成员一致，足可见这三所高校学术水平(至少是在统计学科范畴)之高。前25所高校除新加坡国立大学外均来自国内，且除香港大学外均为大陆内生高校，说明了NSFC对大陆内生高校科研成果研发的大力支持与鼓励。</p>
+        <p>		我们希望找出NSFC资金支持的单位与第一作者为中国人所在单位的关系，因此列出列联表：</p>
+        <p><img src={% static 'network/media/tab2.png' %} style="width:600px;height:150px;position:relative;left:50%;margin-left:-300px;"></p>
+        <h2>载文主体分析</h2>
+        <h3>第一作者所在单位</h3>
+        <p>		统计第一作者所在单位，了解统计学领域科研团队分布情况，通过与高质量论文对应，了解具有较高科研实力的单位信息。</p>
+        <p>		统计总发文数量排名前25的高校或单位，得到频数直方图：</p>
+        <p><img src={% static 'network/media/pic4.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>		排名靠前的高校均为学术性较强的单位，特别是中国科学院大学的发文数量遥遥领先于其他高校；北清次之。从发文数量判断高校单位统计学科能力强弱是片面的，它还受到学校或学院规模等多方面因素的影响。</p>
+        <h3>合作情况</h3>
+        <p>		相比独著，合作文献能结合不同人才的优势，视野更开阔，科学研究更加不受思维、资源等局限，使学科发展能良性循环。还可横向对比国内外论文合作人数，比较哪一类更倾向于团队协作。</p>
+        <p>		统计国内外文献合作人数情况，得到两组不同维度的序列，计算两组均值与方差如表格 3所示：</p>
+        <p><img src={% static 'network/media/tab3.png' %} style="width:500px;height:210px;position:relative;left:50%;margin-left:-250px;"></p>
+        <p>		结果显示，国内合作人数均值高于国外，而方差小于国外，这表明国内学者在进行科研时相比国外学者更倾向于合作，且合作人数范围相对稳定；相较而言，国外学者在进行学术研究时团队规模大体相对更少，但由于国外合作人数方差较大，我们认为在某些特定情况下，国外学者的研究团队规模会进行大幅度的扩充。</p>
+        <p>		下面去除部分异常值，对两组序列绘制箱线图进行进一步分析比较(图表上方显示多少数据被移除出箱线图统计范围)。</p>
+        <p><img src={% static 'network/media/pic5.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p><img src={% static 'network/media/pic6.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p><img src={% static 'network/media/pic7.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p>		箱线图中，橙色线段表示数据的中位数，绿色三角形标出了数据均值，箱子上下边界为数据的上下四分位数，再往外走则是上下边缘。箱线图的结果验证了我们的猜想，国内文献的合作人数相对稳定在[1,8]的整数范围(上下边缘值区间)，而国外文献的合作人数波动范围很大，有一篇文献的合作人数甚至超过了120人(127人)。同时，我们发现中国文献合作人数数据的中位数与下四分位数重合，说明至少有25%的中国文献合作规模为3人。</p>
+        <p>		同时给出国内外合作人数的频数直方图：</p>
+        <p><img src={% static 'network/media/pic8.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p><img src={% static 'network/media/pic9.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+        <p><img src={% static 'network/media/pic10.png' %} style="width:400px;height:400px;position:relative;left:50%;margin-left:-200px;"></p>
+    {% endif %}
+{% endblock content %}
